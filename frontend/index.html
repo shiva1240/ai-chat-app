@@ -11,17 +11,21 @@
 
 <div id="login-screen">
 
-    <h2>Enter Username</h2>
+    <div>
 
-    <input
-        type="text"
-        id="username"
-        placeholder="Enter username"
-    >
+        <h2>AI Chat Login</h2>
 
-    <button onclick="login()">
-        Start Chat
-    </button>
+        <input
+            type="text"
+            id="username"
+            placeholder="Enter username"
+        >
+
+        <button onclick="login()">
+            Start Chat
+        </button>
+
+    </div>
 
 </div>
 
@@ -30,30 +34,36 @@
 
 <div id="chat-screen" style="display:none;">
 
-    <h2>AI Chat 🤖</h2>
+    <div class="chat-container">
 
-    <div id="chat-box"></div>
+        <div class="chat-header">
+            AI Chat 🤖
+        </div>
 
-    <div class="input-area">
+        <div id="chat-box"></div>
 
-        <input
-            type="text"
-            id="user-input"
-            placeholder="Type message..."
-        >
+        <div id="loading" class="loading">
+            AI is typing...
+        </div>
 
-        <button onclick="sendMessage()">
-            Send
-        </button>
+        <div class="input-area">
 
-        <button onclick="clearHistory()" class="clear-btn">
-            Clear
-        </button>
+            <input
+                type="text"
+                id="user-input"
+                placeholder="Type message..."
+            >
 
-    </div>
+            <button onclick="sendMessage()">
+                Send
+            </button>
 
-    <div id="loading" class="loading">
-        AI is typing...
+            <button onclick="clearHistory()" class="clear-btn">
+                Clear
+            </button>
+
+        </div>
+
     </div>
 
 </div>
