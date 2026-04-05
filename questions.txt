@@ -1,0 +1,402 @@
+🎯 Most Important Interview Questions (Must Know)
+
+These are very likely to be asked.
+
+1️⃣ Explain your project architecture.
+
+Answer:
+
+My project is a full-stack AI chat application built using a frontend, backend, AI service, and database.
+
+The frontend is built using HTML, CSS, and JavaScript. It provides a login screen and chat interface.
+The backend is built using FastAPI. It handles API requests from the frontend.
+The AI service connects to an external AI model API to generate responses.
+The database is MongoDB Atlas, where chat history is stored.
+When a user sends a message:
+Frontend sends request to /chat
+Backend calls AI service
+AI response is saved to MongoDB
+Response is sent back to frontend
+2️⃣ Why did you choose FastAPI?
+
+Answer:
+
+I chose FastAPI because:
+
+It is fast and lightweight
+Supports asynchronous programming
+Automatically generates API documentation
+Uses Pydantic for data validation
+Easy to build REST APIs
+
+Also, it integrates well with Python AI libraries.
+
+3️⃣ What is MongoDB Atlas?
+
+Answer:
+
+MongoDB Atlas is a cloud-based NoSQL database service.
+
+In my project:
+
+It stores chat messages
+Each message includes:
+username
+user_message
+ai_response
+timestamp
+
+MongoDB is useful because:
+
+It stores JSON-like documents
+Flexible schema
+Easy to scale
+4️⃣ How does your /chat API work?
+
+Answer:
+
+The /chat endpoint accepts:
+
+{
+  "username": "user1",
+  "message": "Hello"
+}
+
+Steps:
+
+Backend receives message
+Calls AI service
+AI generates reply
+Message and response stored in MongoDB
+Response returned to frontend
+5️⃣ How did you connect frontend and backend?
+
+Answer:
+
+The frontend uses JavaScript fetch() to call backend APIs.
+
+Example:
+
+fetch("http://127.0.0.1:8000/chat", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    username: username,
+    message: message
+  })
+});
+
+This sends requests to the FastAPI server.
+
+6️⃣ What is CORS and why did you use it?
+
+Very common question
+
+Answer:
+
+CORS stands for Cross-Origin Resource Sharing.
+
+Browsers block requests between different origins for security reasons.
+
+Since:
+
+Frontend runs in browser
+Backend runs on localhost server
+
+I enabled CORS middleware in FastAPI to allow communication between them.
+
+7️⃣ What is Pydantic used for?
+
+Answer:
+
+Pydantic is used for:
+
+Data validation
+Request body validation
+Ensuring correct input format
+
+Example:
+
+class ChatRequest(BaseModel):
+    username: str
+    message: str
+
+This ensures that the request contains required fields.
+
+8️⃣ How is chat history stored?
+
+Answer:
+
+Chat history is stored in MongoDB as documents.
+
+Each document contains:
+
+{
+  "username": "user1",
+  "user_message": "Hello",
+  "ai_response": "Hi!",
+  "timestamp": "2026-04-05"
+}
+
+History is retrieved using:
+
+collection.find({"username": username})
+9️⃣ What happens when user logs in?
+
+Answer:
+
+Login is username-based.
+
+Steps:
+
+User enters username
+Username stored in frontend variable
+Chat history loaded for that username
+Future messages stored with same username
+🔟 How did you handle errors?
+
+Answer:
+
+Errors handled in:
+
+AI service using try-except
+Backend APIs return fallback messages
+Frontend shows error messages if request fails
+
+Example:
+
+try:
+    response = client.chat.completions.create(...)
+except Exception:
+    return "AI service unavailable"
+🧠 Backend Questions
+What is Uvicorn?
+
+Answer:
+
+Uvicorn is an ASGI server used to run FastAPI applications.
+
+Command:
+
+uvicorn main:app --reload
+
+It starts the backend server.
+
+What is an API endpoint?
+
+Answer:
+
+An API endpoint is a URL that performs specific actions.
+
+Examples:
+
+POST /chat
+GET /history/{username}
+DELETE /history/{username}
+What is REST API?
+
+Answer:
+
+REST API is an architecture style using HTTP methods:
+
+GET → Read data
+POST → Create data
+DELETE → Remove data
+🧠 MongoDB Questions
+What type of database is MongoDB?
+
+Answer:
+
+MongoDB is a NoSQL document database.
+
+It stores data as:
+
+{
+  "key": "value"
+}
+
+Instead of tables like SQL.
+
+Difference between SQL and MongoDB?
+
+Answer:
+
+SQL:
+
+Tables
+Fixed schema
+
+MongoDB:
+
+Collections
+Flexible schema
+JSON documents
+🧠 Frontend Questions
+How does fetch() work?
+
+Answer:
+
+fetch() sends HTTP requests from browser to backend.
+
+Used for:
+
+Sending messages
+Loading history
+Clearing history
+How did you style the UI?
+
+Answer:
+
+Used CSS Flexbox to:
+
+Center login screen
+Create chat layout
+Align messages left/right
+Style chat bubbles
+🧠 AI Integration Questions
+How did you connect to AI model?
+
+Answer:
+
+Backend calls external AI API using API key.
+
+Steps:
+
+Send user message
+Receive AI response
+Return response to frontend
+What happens if AI fails?
+
+Answer:
+
+Fallback message returned:
+
+AI service unavailable
+
+So system doesn't crash.
+
+🧠 Advanced Questions (Very Valuable)
+How would you scale this project?
+
+Strong answer
+
+Possible improvements:
+
+Add authentication (JWT)
+Use Redis caching
+Add load balancing
+Deploy backend to cloud
+Use Docker containers
+How would you secure this project?
+
+Answer:
+
+Add password authentication
+Use JWT tokens
+Hide API keys using environment variables
+Enable HTTPS
+How would you improve performance?
+
+Answer:
+
+Use async functions
+Cache responses
+Optimize database queries
+🧠 Debugging Questions (Very Likely)
+
+They may ask:
+
+What errors did you face?
+
+Tell real ones you solved:
+
+Example:
+
+Error 1 — ModuleNotFoundError
+
+Cause:
+
+pymongo not installed
+
+Fix:
+
+pip install pymongo
+
+Error 2 — CORS Error
+
+Cause:
+
+Frontend couldn't access backend.
+
+Fix:
+
+Added:
+
+CORSMiddleware
+
+Error 3 — Model Deprecated
+
+Cause:
+
+Old AI model removed.
+
+Fix:
+
+Updated model name.
+
+Mentioning real debugging makes you look strong. 💪
+
+🧠 Practical Coding Questions
+
+Possible:
+
+Write simple FastAPI endpoint
+
+Example:
+
+@app.get("/")
+def root():
+    return {"message": "Hello"}
+Write MongoDB insert
+
+Example:
+
+collection.insert_one(data)
+🎯 Very Smart Questions to Prepare
+
+These impress interviewers.
+
+Why did you separate services into folders?
+
+Answer:
+
+To follow modular design:
+
+routes → API logic
+services → business logic
+database → DB connection
+
+This improves maintainability.
+
+Why use environment variables?
+
+Answer:
+
+To hide sensitive data like:
+
+API keys
+MongoDB URI
+
+Prevents security risks.
+
+🏆 Final Tip — How to Explain Your Project (Short Version)
+
+Practice this:
+
+30-second explanation:
+
+I built a full-stack AI chat application using FastAPI, MongoDB Atlas, and a JavaScript frontend. Users log in using a username and chat with an AI model. Messages are sent through REST APIs, stored in MongoDB, and retrieved as chat history. The system also handles errors, supports multi-user chat history, and includes a styled chat interface.
+
+Memorize this. It’s gold. 🧠✨
