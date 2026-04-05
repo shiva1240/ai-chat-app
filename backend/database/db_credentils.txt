@@ -1,0 +1,4 @@
+user name : ss8721240_db_user
+password : PnqljREdlupd1x4M
+
+connection string : mongodb+srv://ss8721240_db_user:PnqljREdlupd1x4M@cluster0.ynesyns.mongodb.net/
